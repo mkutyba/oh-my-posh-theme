@@ -1,0 +1,145 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "shell",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#ffffff",
+          "background": "#003543",
+          "template": "<#003543,transparent>\ue0b6</> {{ .UserName }}<#666666>@{{ .HostName }}</> "
+        },
+        {
+          "type": "os",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#ffffff",
+          "background": "#0077c2",
+          "template": " {{ if .WSL }}\ue712 on {{ end }}{{ .Icon }}"
+        },
+        {
+          "type": "shell",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#ffffff",
+          "background": "#0077c2",
+          "properties": {
+            "mapped_shell_names": {
+              "pwsh": "PS"
+            }
+          },
+          "template": "\uf120 {{ .Name }} "
+        },
+        {
+          "type": "path",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#ffffff",
+          "background": "#ff479c",
+          "properties": {
+            "folder_separator_icon": "\u00b7",
+            "home_icon": "~",
+            "style": "full"
+          },
+          "template": " \ue5ff {{ .Path }} "
+        },
+        {
+          "type": "dotnet",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#000000",
+          "background": "#00ffff",
+          "template": " \ue70c {{ .Full }} "
+        },
+        {
+          "type": "git",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#193549",
+          "background": "#fffb38",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FF9248{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}",
+            "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
+            "{{ if gt .Behind 0 }}#B388FF{{ end }}"
+          ],
+          "properties": {
+            "branch_max_length": 25,
+            "fetch_stash_count": false,
+            "fetch_status": true,
+            "fetch_upstream_icon": false
+          },
+          "template": " {{ if gt .Behind 0 }}behind {{ .Behind }} {{ end }}{{ if gt .Ahead 0 }}ahead {{ .Ahead }} {{ end }}{{ .HEAD }}{{ if or .Working.Changed .Staging.Changed }}*{{ end }} "
+        },
+        {
+          "type": "exit",
+          "style": "diamond",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "#ffffff",
+          "background": "#00897b",
+          "background_templates": [
+            "{{ if gt .Code 0 }}#e91e63{{ end }}"
+          ],
+          "properties": {
+            "always_enabled": true
+          },
+          "template": " {{ if gt .Code 0 }}\uf00d {{ .Meaning }}{{ else }}\uf42e{{ end }} "
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "executiontime",
+          "style": "diamond",
+          "foreground": "#a9ffb4",
+          "properties": {
+            "style": "dallas",
+            "threshold": 0
+          },
+          "template": " {{ .FormattedMs }}s <#ffffff>\ue601</>"
+        },
+        {
+          "type": "sysinfo",
+          "style": "diamond",
+          "foreground": "#81ff91",
+          "template": " <#ffffff>RAM:</> {{ (div ((sub .PhysicalTotalMemory .PhysicalFreeMemory)|float64) 1073741824.0) }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}GB"
+        },
+        {
+          "type": "time",
+          "style": "diamond",
+          "foreground": "#a9ffb4",
+          "template": " <#ffffff>\uf017</> {{ .CurrentDate | date .Format }} "
+        }
+      ]
+    },
+    {
+      "newline": true,
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#007ACC",
+          "template": "\u279c"
+        },
+        {
+          "type": "root",
+          "style": "plain",
+          "foreground": "#007ACC",
+          "template": "#"
+        }
+      ]
+    }
+  ],
+  "console_title_template": "{{ .Folder }} ({{ .Shell }})",
+  "final_space": true,
+  "version": 2
+}
